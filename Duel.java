@@ -15,10 +15,32 @@ public class Duel {
 	}
 	
 	public static void main(String[] args){
-		Shooter one = new SimpleJoe();
-		Shooter two = new AveragePete();
+		
+    //Class<?> clazz = Class.forName("java.util.Date");
+    //Object date = clazz.newInstance();
+    
+    try {
+    Class shooter1 = Class.forName(args[0]);
+    Class shooter2 = Class.forName(args[1]); 
+
+    Shooter one = (Shooter) shooter1.newInstance();
+		Shooter two = (Shooter) shooter2.newInstance();
 		Duel d = new Duel(one, two);
-		System.out.println(d.run());
+
+    String result = d.run();
+
+    if (result.equals("A")) {System.out.println(args[0] + " wins!!!");}
+    else if (result.equals("B")) {System.out.println(args[1] + " wins!!!");}
+    else {System.out.println("Tie");}
+
+    } catch (ClassNotFoundException ex) {
+      System.err.println(ex + " Interpreter class must be in class path.");
+    } catch(InstantiationException ex) {
+      System.err.println(ex + " Interpreter class must be concrete.");
+    } catch(IllegalAccessException ex) {
+      System.err.println(ex + " Interpreter class must have a no-arg constructor.");
+    }
+
 	}
 	
 	public String run(){
@@ -30,6 +52,12 @@ public class Duel {
 			hisB = hisB + bMove;
 
       System.out.println(aMove + " " + bMove);
+
+      try {
+        Thread.sleep(1000);                 //1000 milliseconds is one second.
+      } catch(InterruptedException ex) {
+        Thread.currentThread().interrupt();
+      }
 
       if (aMove.equals("S")) {
 
@@ -90,7 +118,6 @@ public class Duel {
         } else if (bMove.equals("R")) {bulletsB ++;}
 
       }
-	
     }
     return "T";
   }
