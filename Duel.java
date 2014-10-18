@@ -28,39 +28,103 @@ public class Duel {
 			String bMove = B.play(hisB, hisA);
 			hisA = hisA + aMove;
 			hisB = hisB + bMove;
-			if(aMove.equals("S")){
-				if(bMove.equals("R") && bulletsA > 0){ // Shot them while they were reloading!
-					return "A";
-				}
-				if(bulletsA >= 6){ //Shotgun!
-					if(!(bMove.equals("S") && bulletsB >= 6)){//Not a tie
-						return "A";
-					}
-				}
-				if(bulletsA >0){ bulletsA--; }
-				
-			}
-			if(aMove.equals("R")){ bulletsA++; } // reloaded
-			
-			if(bMove.equals("S")){
-				if(aMove.equals("R") && bulletsB > 0){ // Shot them while they were reloading!
-					return "B";
-				}
-				if(bulletsA >= 6){ //Shotgun!
-					if(!(aMove.equals("S") && bulletsA >= 6)){//Not a tie
-						return "B";
-					}
-				}
-				if(bulletsA >0){ bulletsB--; }
-				
-			}
-			if(bMove.equals("R")){ bulletsB++; } // reloaded
-			
-			
-			
-			//no winner, count a turn and repeat
-		}
-		
-		return "T";
-	}
+
+      System.out.println(aMove + " " + bMove);
+
+      if (aMove.equals("S")) {
+
+        if (bulletsA > 0) {
+
+          if (bMove.equals("S")) {
+            
+            if (bulletsB > 0) {return "T";}
+            else {return "A";}
+
+          } else if (bMove.equals("R")) {
+            
+            return "A";
+
+          } else {
+
+            if (bulletsA > 5) {return "A";}
+            else {bulletsA --;}
+          
+          }
+
+        } else {
+          
+          if (bMove.equals("S")) {
+            
+            if (bulletsB > 0) {return "B";}
+
+          } else if (bMove.equals("R")) {
+
+            bulletsB ++;
+
+          }
+        }
+      } else if (aMove.equals("R")) {
+
+        if (bMove.equals("S")) {
+            
+          if (bulletsB > 0) {return "B";}
+          else {bulletsA ++;}
+
+        } else if (bMove.equals("R")) {
+
+          bulletsA ++;
+          bulletsB ++;
+
+        } else {
+
+          bulletsA ++;
+
+        }
+      } else {
+
+        if (bMove.equals("S")) {
+
+          if (bulletsB > 5) {return "B";}
+          else if (bulletsB > 0) {bulletsB --;}
+
+        } else if (bMove.equals("R")) {bulletsB ++;}
+
+      }
+	
+    }
+    return "T";
+  }
 }
+
+      // if(aMove.equals("S")){
+      // 		if(bMove.equals("R") && bulletsA > 0){ // Shot them while they were reloading!
+      // 			return "A";
+      // 		}
+      // 		if(bulletsA >= 6){ //Shotgun!
+      // 			if(!(bMove.equals("S") && bulletsB >= 6)){//Not a tie
+      // 				return "A";
+      // 			}
+      // 		}
+      // 		if(bulletsA > 0){ bulletsA--; }
+				
+      // 	}
+      // 	if(aMove.equals("R")){ bulletsA++; } // reloaded
+			
+      // 	if(bMove.equals("S")){
+      // 		if(aMove.equals("R") && bulletsB > 0){ // Shot them while they were reloading!
+      // 			return "B";
+      // 		}
+      // 		if(bulletsA >= 6){ //Shotgun!
+      // 			if(!(aMove.equals("S") && bulletsA >= 6)){//Not a tie
+      // 				return "B";
+      // 			}
+      // 		}
+      // 		if(bulletsA >0){ bulletsB--; }
+				
+      // 	}
+      // 	if(bMove.equals("R")){ bulletsB++; } // reloaded
+			
+			
+			
+      // 	//no winner, count a turn and repeat
+      // }
