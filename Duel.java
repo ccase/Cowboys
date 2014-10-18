@@ -46,7 +46,7 @@ public class Duel {
 	public String run(){
 		int turnCounter = 0;
 		while(turnCounter++ < 100){
-			String aMove = A.play(hisA,  hisB);
+			String aMove = A.play(hisA, hisB);
 			String bMove = B.play(hisB, hisA);
 			hisA = hisA + aMove;
 			hisB = hisB + bMove;
