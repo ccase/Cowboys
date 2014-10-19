@@ -55,7 +55,9 @@ public class CopyCatBitch extends Shooter {
 
 CopyCatBitch simply copies his opponent's last move.
 
-Chump's up, let's do this.
+You get the idea.
+
+
 
 
 
