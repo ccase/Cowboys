@@ -37,23 +37,26 @@ public class FightClub {
         System.out.print("Show moves? (y/n) ");
         if (scanner.nextLine().equals("y")) {
           show_moves = true;
+          player.suspend();
         } else {
           show_moves = false;
         }
 
         FightClub single_duel = new FightClub(cowboy1, cowboy2);
 
-        player.suspend();
         single_duel.fight(single_duel.cowboys.get(0), single_duel.cowboys.get(1), show_moves);
 
-        player = new AePlayWave("./sound_effects/theme_song.wav");
-        player.start();
+        if (show_moves) {
+          player = new AePlayWave("./sound_effects/theme_song.wav");
+          player.start();
+        }
                 
         System.out.println();
         System.out.print("Single duel or full tournament? (s/f/q to quit) ");
         
       } else if (answer.equals("f")) {
 
+        boolean should_restart_music = false;
         boolean skip;
         boolean show_moves;
 
@@ -71,12 +74,11 @@ public class FightClub {
         FightClub fc = new FightClub("Cowboys.txt");
         int number_of_cowboys = fc.cowboys.size();
 
-        player.suspend();
-
         for (int i=0; i<number_of_cowboys; i++) {
           for (int j=0; j<number_of_cowboys; j++) {
             if (i != j) {
               if (!skip) {
+
 
                 System.out.println(fc.cowboys.get(i).toS() + " vs " + fc.cowboys.get(j).toS());
                 System.out.println("Type f to fight! (s to skip, a to skip all) ");
@@ -85,6 +87,8 @@ public class FightClub {
                 while (!isDone) {
                   String fight_or_skip = scanner.nextLine();
                   if (fight_or_skip.equals("f")) {
+                    player.suspend();
+                    should_restart_music = true;
                     show_moves = true;
                     isDone = true;
                   } else if (fight_or_skip.equals("s")) {
@@ -104,8 +108,11 @@ public class FightClub {
             }
           }
         }
-        player = new AePlayWave("./sound_effects/theme_song.wav");
-        player.start();
+
+        if (should_restart_music) {
+          player = new AePlayWave("./sound_effects/theme_song.wav");
+          player.start();
+        }
     
         fc.printStandings();
         
