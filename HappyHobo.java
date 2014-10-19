@@ -1,30 +1,45 @@
 
 public class HappyHobo extends Shooter {
 
-    int numBullets = 0;
-    int myBullets = 0; 
+  boolean keepShooting = false;
 
 	public String play(String mine, String other){
 		
     if(mine.equals("")){ return "R"; } //Always reload the first move
 
-    char lastMove = other.charAt(other.length()-1);
-    
-    if (other.length()>1) {secondLastMove = other.charAt(other.length()-2);}
+    char yourLastMove = other.charAt(other.length()-1);
+    char myLastMove = mine.charAt(mine.length()-1);
 
-    if (lastMove == 'S') {numBullets--;}
-    if (lastMove == 'R') {numBullets++;}
-    if (mine.charAt(mine.length()-1) == 'R') {myBullets++;}
-  
-    if (numBullets == 0) { if (myBullets > 0) {myBullets --; return "S";} }
+    //if (other.length()>3) {secondLastMove = other.charAt(other.length()-2);}
+
+    int myRCount = mine.length() - mine.replace("R", "").length();
+    int hisRCount = other.length() - other.replace("R", "").length();
+    int mySCount = mine.length() - mine.replace("S", "").length();
+    int hisSCount = other.length() - other.replace("S", "").length();
+    int myBullets = myRCount - mySCount;
+    int hisBullets = hisRCount - hisSCount;
     
-		if(lastMove == 'R'){ return "B"; }//If you just reloaded, take it easy
-		if(lastMove == 'B'){ 
-      if (secondLastMove == 'B'){ if (myBullets > 0) {myBullets --; return "S";} else {return "R";} }
-      else {return "B";} 
-    }//If you just blocked, take the shot
-		if(lastMove == 'S'){if (myBullets > 0) {myBullets --; return "S";} else {return "R";} }//Out of bullets, better reload
-		
-		return "R";
+    if (myBullets > 5) {return "S";}
+
+    if (hisBullets > 4) {
+      if (myBullets > 1) {return "S";}
+      else {
+        if (hisBullets > 5) {return "S";}
+        else {return "B";}
+      }
+    }
+
+    if (myBullets < 0) {myBullets = 0;}
+    if (hisBullets < 0) {hisBullets = 0;}
+
+    if (myBullets > 0) {
+      if ( (other.length() > 3) && ((other.charAt(other.length()-4)) == 'R') && ((other.charAt(other.length()-3)) == 'R') && ((other.charAt(other.length()-2)) == 'B') && (yourLastMove == 'R') ) {return "S";}
+      if ( (other.length() > 2) && ((other.charAt(other.length()-3)) == 'R') && ((other.charAt(other.length()-2)) == 'R') && (yourLastMove == 'R') ) {return "S";}
+    }
+
+    if (hisBullets > 0) { return "B"; }
+    if (hisBullets == 0) { return "R"; }
+    if (keepShooting == true) { return "S"; }
+    else {return "R";}
 	}
 }

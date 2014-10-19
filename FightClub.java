@@ -49,7 +49,7 @@ public class FightClub {
         boolean skip;
         boolean show_moves;
 
-        System.out.print("Show moves? (y/n) ");
+        System.out.print("Want to see the action? (y/n) ");
         if (scanner.nextLine().equals("y")) {
           skip = false;
           show_moves = true;

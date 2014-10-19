@@ -17,6 +17,11 @@ public class TieGuy extends Shooter {
     if (myBullets < 0) {myBullets = 0;}
     if (hisBullets < 0) {hisBullets = 0;}
 
+    int rounds = mine.length();
+    if (rounds > 2) {
+      if (mine.substring(mine.length()-3).equals("BBB") && 
+          other.substring(other.length()-3).equals("BBB")) {return "R";}
+    }
     if (myBullets > 5) {return "S";}
     else if (hisBullets == 0) {return "R";}
     else if (hisBullets < 5 && myBullets > 0) {return "B";}

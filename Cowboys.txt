@@ -6,3 +6,5 @@ James
 TieGuy
 Elephant
 MadMan
+HappyHobo
+TriggerHappy

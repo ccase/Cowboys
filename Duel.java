@@ -25,11 +25,18 @@ public class Duel {
 			String bMove = B.play(hisB, hisA);
 			hisA = hisA + aMove;
 			hisB = hisB + bMove;
-      
+
+      int printBulletsA = bulletsA + ((aMove.equals("R"))?1:0) - ((aMove.equals("S"))?1:0);
+      int printBulletsB = bulletsB + ((bMove.equals("R"))?1:0) - ((bMove.equals("S"))?1:0);
+      if (printBulletsA < 0) {printBulletsA = 0;}
+      if (printBulletsB < 0) {printBulletsB = 0;}
+
       if (show_moves) {
         System.out.print("\u001b[2J");
         System.out.flush();
-        System.out.println("      " + A.toS() + "                     ------versus------                    " + B.toS());
+        System.out.println("Round " + rounds + "\n");
+        System.out.println("      " + A.toS() + "                     ------versus------                    " + B.toS() + "\n");
+        System.out.println("Ammo  " + printBulletsA + "                                                           " + printBulletsB);
         if (aMove.equals("S") && bMove.equals("S")) {System.out.print(AsciiArt.ss);}
         else if (aMove.equals("S") && bMove.equals("R")) {System.out.print(AsciiArt.sr);}
         else if (aMove.equals("S") && bMove.equals("B")) {System.out.print(AsciiArt.sb);}
@@ -114,4 +121,5 @@ public class Duel {
     }
     return "T";
   }
+  
 }
