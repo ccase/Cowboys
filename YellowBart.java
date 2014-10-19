@@ -22,7 +22,7 @@ public class YellowBart extends Shooter {
 		}
 		
 		//If you're about to get shot, shoot
-		if(hisAmmo > 4 && myAmmo > 0){ return "S";}
+		if((hisAmmo + myAmmo) > 5 && myAmmo > 0){ return "S";}
 		
 		//Otherwise, play it safe partner
 		return "B";
