@@ -10,18 +10,34 @@ public class FightClub {
     FightClub fc = new FightClub("Cowboys.txt");
     int number_of_cowboys = fc.cowboys.size();
     
-    for(int i=1; i<number_of_cowboys; i++) {
-      for (int j=1; j<number_of_cowboys; j++) {
+    for (int i=0; i<number_of_cowboys; i++) {
+      for (int j=0; j<number_of_cowboys; j++) {
         if (i != j) {
           fc.fight(i,j);
         }
       }
     }
     
-    System.out.printf("%-15s %15s %n", "Wins", "Losses", "Ties", "Points");
-    for (int i=1; i<number_of_cowboys; i++) {
+    ArrayList<Shooter> sortedCowboys = new ArrayList<Shooter>();
+    for (int i=0; i<number_of_cowboys; i++) {
+      int index = 0;
+      for (int j=0; j<sortedCowboys.size(); j++) {
+        if (fc.cowboys.get(i).getPoints() < sortedCowboys.get(j).getPoints()) {
+          index = j+1;
+        }
+      }
+      sortedCowboys.add(index, fc.cowboys.get(i));
+    }
 
-
+    System.out.printf("%15s %15s %15s %15s %15s %n", "Cowboy", "Wins", "Losses", "Ties", "Points");
+    for (int i=0; i<number_of_cowboys; i++) {
+      Shooter s = sortedCowboys.get(i);
+      System.out.printf("%15s %15s %15s %15s %15s %n",
+                        s.toS(),
+                        s.getWins(),
+                        s.getLosses(),
+                        s.getTies(),
+                        s.getPoints());
 
     }
     
@@ -55,26 +71,31 @@ public class FightClub {
     Shooter two = cowboys.get(b);
     Duel d = new Duel(one, two);
 
-    System.out.println(one.toS() + " vs " + two.toS());
+    String matchup = one.toS() + " vs " + two.toS() + ": ";
+    String outcome;
 
     String result = d.run();
 
     if (result.equals("A")) {
-      System.out.println(one.toS() + " wins!!!");
+      outcome = one.toS() + " wins!!!";
       one.setWins(one.getWins() + 1);
       two.setLosses(two.getLosses() + 1);
 
     } else if (result.equals("B")) {
-      System.out.println(two.toS() + " wins!!!");
+      outcome = two.toS() + " wins!!!";
       one.setLosses(one.getLosses() + 1);
       two.setWins(two.getWins() + 1);
 
     } else {
-      System.out.println("Tie");
+      outcome = "Tie";
       one.setTies(one.getTies() + 1);
       two.setTies(two.getTies() + 1);
 
     }
+    one.setPoints(one.getWins()*3 + one.getTies());
+    two.setPoints(two.getWins()*3 + two.getTies());
+
+    System.out.printf("%-30.30s  %-30.30s%n", matchup, outcome);
     System.out.println();
   }
 }

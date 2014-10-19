@@ -1,0 +1,92 @@
+SimpleJoe vs AveragePete:       AveragePete wins!!!           
+
+SimpleJoe vs CopyCatBitch:      SimpleJoe wins!!!             
+
+SimpleJoe vs TieGuy:            TieGuy wins!!!                
+
+SimpleJoe vs Elephant:          Elephant wins!!!              
+
+SimpleJoe vs Tom:               Tom wins!!!                   
+
+SimpleJoe vs James:             Tie                           
+
+AveragePete vs SimpleJoe:       AveragePete wins!!!           
+
+AveragePete vs CopyCatBitch:    CopyCatBitch wins!!!          
+
+AveragePete vs TieGuy:          TieGuy wins!!!                
+
+AveragePete vs Elephant:        Elephant wins!!!              
+
+AveragePete vs Tom:             Tom wins!!!                   
+
+AveragePete vs James:           Tie                           
+
+CopyCatBitch vs SimpleJoe:      SimpleJoe wins!!!             
+
+CopyCatBitch vs AveragePete:    CopyCatBitch wins!!!          
+
+CopyCatBitch vs TieGuy:         Tie                           
+
+CopyCatBitch vs Elephant:       Elephant wins!!!              
+
+CopyCatBitch vs Tom:            CopyCatBitch wins!!!          
+
+CopyCatBitch vs James:          Tie                           
+
+TieGuy vs SimpleJoe:            TieGuy wins!!!                
+
+TieGuy vs AveragePete:          TieGuy wins!!!                
+
+TieGuy vs CopyCatBitch:         Tie                           
+
+TieGuy vs Elephant:             Elephant wins!!!              
+
+TieGuy vs Tom:                  TieGuy wins!!!                
+
+TieGuy vs James:                Tie                           
+
+Elephant vs SimpleJoe:          Elephant wins!!!              
+
+Elephant vs AveragePete:        AveragePete wins!!!           
+
+Elephant vs CopyCatBitch:       Elephant wins!!!              
+
+Elephant vs TieGuy:             Elephant wins!!!              
+
+Elephant vs Tom:                Elephant wins!!!              
+
+Elephant vs James:              James wins!!!                 
+
+Tom vs SimpleJoe:               Tom wins!!!                   
+
+Tom vs AveragePete:             Tom wins!!!                   
+
+Tom vs CopyCatBitch:            CopyCatBitch wins!!!          
+
+Tom vs TieGuy:                  TieGuy wins!!!                
+
+Tom vs Elephant:                Elephant wins!!!              
+
+Tom vs James:                   James wins!!!                 
+
+James vs SimpleJoe:             Tie                           
+
+James vs AveragePete:           Tie                           
+
+James vs CopyCatBitch:          Tie                           
+
+James vs TieGuy:                Tie                           
+
+James vs Elephant:              James wins!!!                 
+
+James vs Tom:                   Tie                           
+
+         Cowboy            Wins          Losses            Ties          Points 
+       Elephant               9               3               0              27 
+         TieGuy               6               2               4              22 
+          James               3               0               9              18 
+   CopyCatBitch               4               4               4              16 
+            Tom               4               7               1              13 
+    AveragePete               3               7               2              11 
+      SimpleJoe               2               8               2               8 

@@ -22,7 +22,7 @@ public class Duel {
 			hisA = hisA + aMove;
 			hisB = hisB + bMove;
 
-      System.out.println(aMove + " " + bMove);
+      // System.out.println(aMove + " " + bMove);
 
       // try {
       //   Thread.sleep(1000);                 //1000 milliseconds is one second.
