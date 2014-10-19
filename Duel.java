@@ -27,7 +27,17 @@ public class Duel {
 			hisB = hisB + bMove;
       
       if (show_moves) {
-        System.out.println(aMove + " " + bMove);
+        System.out.print("\u001b[2J");
+        System.out.flush();
+        if (aMove.equals("S") && bMove.equals("S")) {System.out.print(AsciiArt.ss);}
+        else if (aMove.equals("S") && bMove.equals("R")) {System.out.print(AsciiArt.sr);}
+        else if (aMove.equals("S") && bMove.equals("B")) {System.out.print(AsciiArt.sb);}
+        else if (aMove.equals("R") && bMove.equals("S")) {System.out.print(AsciiArt.rs);}
+        else if (aMove.equals("R") && bMove.equals("R")) {System.out.print(AsciiArt.rr);}
+        else if (aMove.equals("R") && bMove.equals("B")) {System.out.print(AsciiArt.rb);}
+        else if (aMove.equals("B") && bMove.equals("S")) {System.out.print(AsciiArt.bs);}
+        else if (aMove.equals("B") && bMove.equals("R")) {System.out.print(AsciiArt.br);}
+        else {System.out.print(AsciiArt.bb);}
       }
 
       if (wait) {

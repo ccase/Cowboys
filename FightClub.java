@@ -8,6 +8,11 @@ public class FightClub {
 
 	public static void main(String[] args){
     
+    System.out.println();
+    System.out.println();
+  
+    System.out.print(AsciiArt.pikachus);
+
     Scanner scanner = new Scanner(System.in);
     System.out.print("Single duel or full tournament? (s/f/q to quit) ");
     
@@ -49,6 +54,25 @@ public class FightClub {
         
       } else if (answer.equals("f")) {
 
+        boolean show_moves;
+        boolean wait;
+
+        System.out.print("Show moves? (y/n) ");
+        if (scanner.nextLine().equals("y")) {
+          show_moves = true;
+        } else {
+          show_moves = false;
+        }
+
+        System.out.print("Wait between turns? (y/n) ");
+        if (scanner.nextLine().equals("y")) {
+          wait = true;
+        } else {
+          wait = false;
+        }
+        
+        System.out.println();
+
         FightClub fc = new FightClub("Cowboys.txt");
         int number_of_cowboys = fc.cowboys.size();
 
@@ -57,7 +81,11 @@ public class FightClub {
             if (i != j) {
               System.out.println(fc.cowboys.get(i).toS() + " vs " + 
                                  fc.cowboys.get(j).toS());
-              fc.fight(fc.cowboys.get(i),fc.cowboys.get(j),true,true);
+
+              System.out.println("Type go to fight!");
+              while (!scanner.nextLine().equals("go")) {}
+
+              fc.fight(fc.cowboys.get(i),fc.cowboys.get(j),show_moves,wait);
             }
           }
         }
@@ -67,6 +95,10 @@ public class FightClub {
         System.out.print("Single duel or full tournament? (s/f/q to quit) ");
       } else if (answer.equals("q")) {
         done = true;
+        System.out.println();
+        System.out.println();
+        System.out.println(AsciiArt.owls);
+        System.out.println("Thanks for playing :)\n");
       } else {
         System.out.print("? ");
       }
