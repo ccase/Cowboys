@@ -71,6 +71,8 @@ public class FightClub {
         FightClub fc = new FightClub("Cowboys.txt");
         int number_of_cowboys = fc.cowboys.size();
 
+        player.suspend();
+
         for (int i=0; i<number_of_cowboys; i++) {
           for (int j=0; j<number_of_cowboys; j++) {
             if (i != j) {
@@ -85,7 +87,6 @@ public class FightClub {
                   if (fight_or_skip.equals("f")) {
                     show_moves = true;
                     isDone = true;
-                    player.suspend();
                   } else if (fight_or_skip.equals("s")) {
                     show_moves = false;
                     isDone = true;
