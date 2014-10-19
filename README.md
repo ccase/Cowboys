@@ -56,6 +56,11 @@ public class CopyCatBitch extends Shooter {
 CopyCatBitch simply copies his opponent's last move.
 
 You get the idea.
+Email cowboys to me, jreuter@wesleyan.edu, and I'll add them to the tournament, or if you want you could fork the github and submit a pull request with your cowboy file.
+Leaderboard can be updated regularly.
+Looking at/copying the other cowboys in the github is considered cheating.
+
+Chump's up, let's do this.
 
 
 
