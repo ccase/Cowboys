@@ -60,11 +60,11 @@ public class James extends Shooter{
 				}
 			}
 		}
-		if(blocks > 7 && myAmmo > 5)
+		if(blocks > 4 && myAmmo > 2)
 		{
 			return "S";
 		}
-		if(blocks > 7) {
+		if(blocks > 4) {
 			return "R";
 		}
 	

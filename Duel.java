@@ -16,7 +16,7 @@ public class Duel {
 		
 	}
 		
-	public String run(boolean show_moves, boolean wait){
+	public String run(boolean show_moves){
 		int turnCounter = 0;
 
 		while(turnCounter++ < 100){
@@ -29,6 +29,7 @@ public class Duel {
       if (show_moves) {
         System.out.print("\u001b[2J");
         System.out.flush();
+        System.out.println("      " + A.toS() + "                     ------versus------                    " + B.toS());
         if (aMove.equals("S") && bMove.equals("S")) {System.out.print(AsciiArt.ss);}
         else if (aMove.equals("S") && bMove.equals("R")) {System.out.print(AsciiArt.sr);}
         else if (aMove.equals("S") && bMove.equals("B")) {System.out.print(AsciiArt.sb);}
@@ -38,9 +39,7 @@ public class Duel {
         else if (aMove.equals("B") && bMove.equals("S")) {System.out.print(AsciiArt.bs);}
         else if (aMove.equals("B") && bMove.equals("R")) {System.out.print(AsciiArt.br);}
         else {System.out.print(AsciiArt.bb);}
-      }
-
-      if (wait) {
+      
         Scanner s = new Scanner(System.in);
         s.nextLine();
 
