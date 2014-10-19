@@ -8,18 +8,23 @@ public class FightClub {
 	public static void main(String[] args){
 
     FightClub fc = new FightClub("Cowboys.txt");
-
-    fc.fight(0,1);
-
     int number_of_cowboys = fc.cowboys.size();
     
-    for(int i=1; i<number_of_cowboys; i++){
+    for(int i=1; i<number_of_cowboys; i++) {
       for (int j=1; j<number_of_cowboys; j++) {
         if (i != j) {
           fc.fight(i,j);
         }
       }
     }
+    
+    System.out.printf("%-15s %15s %n", "Wins", "Losses", "Ties", "Points");
+    for (int i=1; i<number_of_cowboys; i++) {
+
+
+
+    }
+    
   }
 
   public FightClub(String filename) {
