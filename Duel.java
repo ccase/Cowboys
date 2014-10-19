@@ -13,36 +13,7 @@ public class Duel {
 		this.B = B;
 		
 	}
-	
-	public static void main(String[] args){
 		
-    //Class<?> clazz = Class.forName("java.util.Date");
-    //Object date = clazz.newInstance();
-    
-    try {
-    Class shooter1 = Class.forName(args[0]);
-    Class shooter2 = Class.forName(args[1]); 
-
-    Shooter one = (Shooter) shooter1.newInstance();
-		Shooter two = (Shooter) shooter2.newInstance();
-		Duel d = new Duel(one, two);
-
-    String result = d.run();
-
-    if (result.equals("A")) {System.out.println(args[0] + " wins!!!");}
-    else if (result.equals("B")) {System.out.println(args[1] + " wins!!!");}
-    else {System.out.println("Tie");}
-
-    } catch (ClassNotFoundException ex) {
-      System.err.println(ex + " Interpreter class must be in class path.");
-    } catch(InstantiationException ex) {
-      System.err.println(ex + " Interpreter class must be concrete.");
-    } catch(IllegalAccessException ex) {
-      System.err.println(ex + " Interpreter class must have a no-arg constructor.");
-    }
-
-	}
-	
 	public String run(){
 		int turnCounter = 0;
 		while(turnCounter++ < 100){
@@ -53,44 +24,45 @@ public class Duel {
 
       System.out.println(aMove + " " + bMove);
 
-      try {
-        Thread.sleep(1000);                 //1000 milliseconds is one second.
-      } catch(InterruptedException ex) {
-        Thread.currentThread().interrupt();
-      }
+      // try {
+      //   Thread.sleep(1000);                 //1000 milliseconds is one second.
+      // } catch(InterruptedException ex) {
+      //   Thread.currentThread().interrupt();
+      // }
 
       if (aMove.equals("S")) {
 
-        if (bulletsA > 0) {
+        if (bulletsA > 5) {
 
           if (bMove.equals("S")) {
             
-            if (bulletsB > 0) {return "T";}
+            if (bulletsB > 5) {bulletsA --; bulletsB --;}
             else {return "A";}
 
-          } else if (bMove.equals("R")) {
-            
-            return "A";
+          } else {return "A";}
 
-          } else {
+        } else if (bulletsA > 0) {
 
-            if (bulletsA > 5) {return "A";}
-            else {bulletsA --;}
-          
-          }
+          if (bMove.equals("S")) {
+
+            if (bulletsB > 5) {return "B";}
+            else if (bulletsB > 0) {bulletsA --; bulletsB --;}
+            else {return "A";}
+
+          } else if (bMove.equals("R")) {return "A";}
+
+          else {bulletsA --;}
 
         } else {
-          
+
           if (bMove.equals("S")) {
-            
+
             if (bulletsB > 0) {return "B";}
 
-          } else if (bMove.equals("R")) {
+          } else if (bMove.equals("R")) {bulletsB ++;}
 
-            bulletsB ++;
-
-          }
         }
+
       } else if (aMove.equals("R")) {
 
         if (bMove.equals("S")) {
@@ -108,6 +80,7 @@ public class Duel {
           bulletsA ++;
 
         }
+
       } else {
 
         if (bMove.equals("S")) {
