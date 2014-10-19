@@ -32,20 +32,77 @@ public class Duel {
       if (printBulletsB < 0) {printBulletsB = 0;}
 
       if (show_moves) {
+
         System.out.print("\u001b[2J");
         System.out.flush();
         System.out.println("Round " + rounds + "\n");
         System.out.println("      " + A.toS() + "                     ------versus------                    " + B.toS() + "\n");
         System.out.println("Ammo  " + printBulletsA + "                                                           " + printBulletsB);
-        if (aMove.equals("S") && bMove.equals("S")) {System.out.print(AsciiArt.ss);}
-        else if (aMove.equals("S") && bMove.equals("R")) {System.out.print(AsciiArt.sr);}
-        else if (aMove.equals("S") && bMove.equals("B")) {System.out.print(AsciiArt.sb);}
-        else if (aMove.equals("R") && bMove.equals("S")) {System.out.print(AsciiArt.rs);}
-        else if (aMove.equals("R") && bMove.equals("R")) {System.out.print(AsciiArt.rr);}
-        else if (aMove.equals("R") && bMove.equals("B")) {System.out.print(AsciiArt.rb);}
-        else if (aMove.equals("B") && bMove.equals("S")) {System.out.print(AsciiArt.bs);}
-        else if (aMove.equals("B") && bMove.equals("R")) {System.out.print(AsciiArt.br);}
-        else {System.out.print(AsciiArt.bb);}
+        
+        AePlayWave aw;
+
+        if (aMove.equals("S") && bMove.equals("S")) {
+          System.out.print(AsciiArt.ss);
+          if (bulletsA > 0 || bulletsB > 0) {
+            aw = new AePlayWave("./sound_effects/shot.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("S") && bMove.equals("R")) {
+          System.out.print(AsciiArt.sr);
+          if (bulletsA > 0) {
+            aw = new AePlayWave("./sound_effects/pain.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("S") && bMove.equals("B")) {
+          System.out.print(AsciiArt.sb);
+          if (bulletsA > 5) {
+            aw = new AePlayWave("./sound_effects/shot.wav" );
+          } else if (bulletsA > 0) {
+            aw = new AePlayWave("./sound_effects/richochet.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("R") && bMove.equals("S")) {
+          System.out.print(AsciiArt.rs);
+          if (bulletsB > 0) {
+            aw = new AePlayWave("./sound_effects/pain.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("R") && bMove.equals("R")) {
+          System.out.print(AsciiArt.rr);
+          aw = new AePlayWave("./sound_effects/reload.wav" );
+        }
+        else if (aMove.equals("R") && bMove.equals("B")) {
+          System.out.print(AsciiArt.rb);
+          aw = new AePlayWave("./sound_effects/reload.wav" );
+        }
+        else if (aMove.equals("B") && bMove.equals("S")) {
+          System.out.print(AsciiArt.bs);
+          if (bulletsB > 5) {
+            aw = new AePlayWave("./sound_effects/shot.wav" );
+          } else if (bulletsB > 0) {
+            aw = new AePlayWave("./sound_effects/richochet.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("B") && bMove.equals("R")) {
+          System.out.print(AsciiArt.br);
+          aw = new AePlayWave("./sound_effects/reload.wav" );
+        }
+        else {
+          System.out.print(AsciiArt.bb);
+          aw = new AePlayWave("" );
+        }
+
+        aw.start();
       
         Scanner s = new Scanner(System.in);
         s.nextLine();
