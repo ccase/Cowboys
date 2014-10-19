@@ -7,7 +7,10 @@ public class FightClub {
   ArrayList<Shooter> cowboys = new ArrayList<Shooter>();
 
 	public static void main(String[] args){
-    
+
+    AePlayWave player = new AePlayWave("./sound_effects/theme_song.wav");
+    player.start();
+
     System.out.println();
     System.out.println();
   
@@ -39,7 +42,12 @@ public class FightClub {
         }
 
         FightClub single_duel = new FightClub(cowboy1, cowboy2);
+
+        player.suspend();
         single_duel.fight(single_duel.cowboys.get(0), single_duel.cowboys.get(1), show_moves);
+
+        player = new AePlayWave("./sound_effects/theme_song.wav");
+        player.start();
                 
         System.out.println();
         System.out.print("Single duel or full tournament? (s/f/q to quit) ");
@@ -69,7 +77,7 @@ public class FightClub {
               if (!skip) {
 
                 System.out.println(fc.cowboys.get(i).toS() + " vs " + fc.cowboys.get(j).toS());
-                System.out.println("Type f to fight! (s to skip) ");
+                System.out.println("Type f to fight! (s to skip, a to skip all) ");
 
                 boolean isDone = false;
                 while (!isDone) {
@@ -77,10 +85,15 @@ public class FightClub {
                   if (fight_or_skip.equals("f")) {
                     show_moves = true;
                     isDone = true;
+                    player.suspend();
                   } else if (fight_or_skip.equals("s")) {
                     show_moves = false;
                     isDone = true;
-                  } 
+                  } else if (fight_or_skip.equals("a")) {
+                    show_moves = false;
+                    skip = true;
+                    isDone = true;
+                  }
                 }
                 isDone = false;
               } else {
@@ -90,6 +103,8 @@ public class FightClub {
             }
           }
         }
+        player = new AePlayWave("./sound_effects/theme_song.wav");
+        player.start();
     
         fc.printStandings();
         
@@ -99,6 +114,7 @@ public class FightClub {
         System.out.println();
         System.out.println();
         System.out.println(AsciiArt.owls);
+        player.stop();
       } else {
         System.out.print("? ");
       }
