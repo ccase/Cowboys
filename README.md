@@ -37,7 +37,7 @@ public class SimpleJoe extends Shooter {
 	}
 }
 
-SimpleJoe simpy reloads and shoots, reloads and shoots.
+SimpleJoe simply reloads and shoots, reloads and shoots.
 Notice that the move history of each player is stored as a string composed of the letters "S" = shoot, "R" = reload, and "B" = block.
 The history string is ordered such that the most recent move occurs at the end of the string.
 Here is another example of a simple cowboy, CopyCatBitch.
