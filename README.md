@@ -56,15 +56,15 @@ public class CopyCatBitch extends Shooter {
 CopyCatBitch simply copies his opponent's last move.
 
 You get the idea.
-Email cowboys to me, jreuter@wesleyan.edu, and I'll add them to the tournament, or if you want you could fork the github and submit a pull request with your cowboy file.
+Email cowboys to me, jreuter@wesleyan.edu, and I'll add them to the tournament, or if you want you could fork the github and submit a pull request with your cowboy file. Plase add your name in comments at the top of your submission.
 
 Testing your cowboy:
 To run the tournament, first fork the github repo and pull it to your computer.
 Once you have the repo downloaded, add your new cowboy class file to it, compile everything (javac *.java) and then run the FightClub class (java FightClub).
-Leaderboard can be updated regularly.
-Looking at/copying the other cowboys in the github is considered cheating.
+Leaderboard will be updated regularly.
+Feel free to look at other submissions, but it is considered bad sportsmanship to copy ideas or specifically target another code with your own.
 
-Chump's up, let's do this.
+Pony up, let's do this.
 
 
 
