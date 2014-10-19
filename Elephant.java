@@ -13,11 +13,9 @@ class Elephant extends Shooter
 
 	    public String play(String me, String him){
 
-        //Reset probs
-        for(Choice c : analysis){
-          c.probability = 0;
-        }
-
+	    int hisAmmo = findAmmo(him);
+		int meAmmo = findAmmo(me);	
+	    	
 	    //Always load first, duh
 	    if(him.length() == 0){
 	    	return reload();
@@ -26,11 +24,19 @@ class Elephant extends Shooter
 	    else if(him.length() == 1){
 	    	return block();
 	    }
-	    
+	    //Special cases
+	    //If almost at shotgun, wait for them to spend ammo
+	    else if(meAmmo == 5 && hisAmmo > 0){
+	    	return block();
+	    	
+	    }
+	    //If they are almost at shotgun, save a bullet but try to stop them
+	    else if(hisAmmo == 5 && meAmmo > 1){
+	    	return shoot();
+	    }
 	    else{
 	      analyze(him);
-	      int hisAmmo = findAmmo(him);
-	      int meAmmo = findAmmo(me);
+	      
 
 	      //What will he do next?
 	      char hisLast = him.toCharArray()[him.toCharArray().length - 1];
