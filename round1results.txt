@@ -40,7 +40,7 @@ TieGuy vs AveragePete:          TieGuy wins!!!
 
 TieGuy vs CopyCatBitch:         Tie                           
 
-TieGuy vs Elephant:             Elephant wins!!!              
+TieGuy vs Elephant:             TieGuy wins!!!                
 
 TieGuy vs Tom:                  TieGuy wins!!!                
 
@@ -52,7 +52,7 @@ Elephant vs AveragePete:        AveragePete wins!!!
 
 Elephant vs CopyCatBitch:       Elephant wins!!!              
 
-Elephant vs TieGuy:             Elephant wins!!!              
+Elephant vs TieGuy:             TieGuy wins!!!                
 
 Elephant vs Tom:                Elephant wins!!!              
 
@@ -64,7 +64,7 @@ Tom vs AveragePete:             Tom wins!!!
 
 Tom vs CopyCatBitch:            CopyCatBitch wins!!!          
 
-Tom vs TieGuy:                  TieGuy wins!!!                
+Tom vs TieGuy:                  Tom wins!!!                   
 
 Tom vs Elephant:                Elephant wins!!!              
 
@@ -83,10 +83,10 @@ James vs Elephant:              James wins!!!
 James vs Tom:                   Tie                           
 
          Cowboy            Wins          Losses            Ties          Points 
-       Elephant               9               3               0              27 
-         TieGuy               6               2               4              22 
+         TieGuy               7               1               4              25 
+       Elephant               7               5               0              21 
           James               3               0               9              18 
+            Tom               5               6               1              16 
    CopyCatBitch               4               4               4              16 
-            Tom               4               7               1              13 
     AveragePete               3               7               2              11 
       SimpleJoe               2               8               2               8 

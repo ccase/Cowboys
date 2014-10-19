@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Duel {
 
@@ -7,28 +8,38 @@ public class Duel {
 	String hisB = "";
 	int bulletsA = 0;
 	int bulletsB = 0;
-	
+  int rounds = 0;
+
 	public Duel(Shooter A, Shooter B){
 		this.A = A;
 		this.B = B;
 		
 	}
 		
-	public String run(){
+	public String run(boolean show_moves, boolean wait){
 		int turnCounter = 0;
+
 		while(turnCounter++ < 100){
+      rounds = turnCounter;
 			String aMove = A.play(hisA, hisB);
 			String bMove = B.play(hisB, hisA);
 			hisA = hisA + aMove;
 			hisB = hisB + bMove;
+      
+      if (show_moves) {
+        System.out.println(aMove + " " + bMove);
+      }
 
-      // System.out.println(aMove + " " + bMove);
+      if (wait) {
+        Scanner s = new Scanner(System.in);
+        s.nextLine();
 
-      // try {
-      //   Thread.sleep(1000);                 //1000 milliseconds is one second.
-      // } catch(InterruptedException ex) {
-      //   Thread.currentThread().interrupt();
-      // }
+        // try {
+        //   Thread.sleep(1000);                 //1000 milliseconds is one second.
+        // } catch(InterruptedException ex) {
+        //   Thread.currentThread().interrupt();
+        // }
+      }
 
       if (aMove.equals("S")) {
 
@@ -95,36 +106,3 @@ public class Duel {
     return "T";
   }
 }
-
-      // if(aMove.equals("S")){
-      // 		if(bMove.equals("R") && bulletsA > 0){ // Shot them while they were reloading!
-      // 			return "A";
-      // 		}
-      // 		if(bulletsA >= 6){ //Shotgun!
-      // 			if(!(bMove.equals("S") && bulletsB >= 6)){//Not a tie
-      // 				return "A";
-      // 			}
-      // 		}
-      // 		if(bulletsA > 0){ bulletsA--; }
-				
-      // 	}
-      // 	if(aMove.equals("R")){ bulletsA++; } // reloaded
-			
-      // 	if(bMove.equals("S")){
-      // 		if(aMove.equals("R") && bulletsB > 0){ // Shot them while they were reloading!
-      // 			return "B";
-      // 		}
-      // 		if(bulletsA >= 6){ //Shotgun!
-      // 			if(!(aMove.equals("S") && bulletsA >= 6)){//Not a tie
-      // 				return "B";
-      // 			}
-      // 		}
-      // 		if(bulletsA >0){ bulletsB--; }
-				
-      // 	}
-      // 	if(bMove.equals("R")){ bulletsB++; } // reloaded
-			
-			
-			
-      // 	//no winner, count a turn and repeat
-      // }

@@ -13,6 +13,11 @@ class Elephant extends Shooter
 
 	    public String play(String me, String him){
 
+        //Reset probs
+        for(Choice c : analysis){
+          c.probability = 0;
+        }
+
 	    //Always load first, duh
 	    if(him.length() == 0){
 	    	return reload();

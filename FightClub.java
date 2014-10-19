@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.*;
 
 public class FightClub {
@@ -6,41 +7,87 @@ public class FightClub {
   ArrayList<Shooter> cowboys = new ArrayList<Shooter>();
 
 	public static void main(String[] args){
-
-    FightClub fc = new FightClub("Cowboys.txt");
-    int number_of_cowboys = fc.cowboys.size();
     
-    for (int i=0; i<number_of_cowboys; i++) {
-      for (int j=0; j<number_of_cowboys; j++) {
-        if (i != j) {
-          fc.fight(i,j);
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Single duel or full tournament? (s/f/q to quit) ");
+    
+    Boolean done = false;
+    while (!done) {
+      String answer = scanner.nextLine();
+      if (answer.equals("s")) {
+
+        String cowboy1;
+        String cowboy2;
+        boolean show_moves;
+        boolean wait;
+
+        System.out.print("Cowboy 1? ");
+        cowboy1 = scanner.nextLine();
+        System.out.print("Cowboy 2? ");
+        cowboy2 = scanner.nextLine();
+
+        System.out.print("Show moves? (y/n) ");
+        if (scanner.nextLine().equals("y")) {
+          show_moves = true;
+        } else {
+          show_moves = false;
         }
+
+        System.out.print("Wait between turns? (y/n) ");
+        if (scanner.nextLine().equals("y")) {
+          wait = true;
+        } else {
+          wait = false;
+        }
+
+        FightClub single_duel = new FightClub(cowboy1, cowboy2);
+        single_duel.fight(single_duel.cowboys.get(0), 
+                          single_duel.cowboys.get(1), show_moves, wait);
+                
+        System.out.println();
+        System.out.print("Single duel or full tournament? (s/f/q to quit) ");
+        
+      } else if (answer.equals("f")) {
+
+        FightClub fc = new FightClub("Cowboys.txt");
+        int number_of_cowboys = fc.cowboys.size();
+
+        for (int i=0; i<number_of_cowboys; i++) {
+          for (int j=0; j<number_of_cowboys; j++) {
+            if (i != j) {
+              System.out.println(fc.cowboys.get(i).toS() + " vs " + 
+                                 fc.cowboys.get(j).toS());
+              fc.fight(fc.cowboys.get(i),fc.cowboys.get(j),true,true);
+            }
+          }
+        }
+    
+        fc.printStandings();
+        
+        System.out.print("Single duel or full tournament? (s/f/q to quit) ");
+      } else if (answer.equals("q")) {
+        done = true;
+      } else {
+        System.out.print("? ");
       }
     }
-    
-    ArrayList<Shooter> sortedCowboys = new ArrayList<Shooter>();
-    for (int i=0; i<number_of_cowboys; i++) {
-      int index = 0;
-      for (int j=0; j<sortedCowboys.size(); j++) {
-        if (fc.cowboys.get(i).getPoints() < sortedCowboys.get(j).getPoints()) {
-          index = j+1;
-        }
-      }
-      sortedCowboys.add(index, fc.cowboys.get(i));
-    }
+  }
 
-    System.out.printf("%15s %15s %15s %15s %15s %n", "Cowboy", "Wins", "Losses", "Ties", "Points");
-    for (int i=0; i<number_of_cowboys; i++) {
-      Shooter s = sortedCowboys.get(i);
-      System.out.printf("%15s %15s %15s %15s %15s %n",
-                        s.toS(),
-                        s.getWins(),
-                        s.getLosses(),
-                        s.getTies(),
-                        s.getPoints());
-
-    }
+  
+  public FightClub(String a, String b) {
     
+    try {
+      Class shooter1 = Class.forName(a);
+      Class shooter2 = Class.forName(b);
+      cowboys.add((Shooter) shooter1.newInstance());
+      cowboys.add((Shooter) shooter2.newInstance());
+    } catch (ClassNotFoundException ex) {
+      System.err.println(ex + " Interpreter class must be in class path.");
+    } catch(InstantiationException ex) {
+      System.err.println(ex + " Interpreter class must be concrete.");
+    } catch(IllegalAccessException ex) {
+      System.err.println(ex + " Interpreter class must have a no-arg constructor.");
+    }
   }
 
   public FightClub(String filename) {
@@ -65,16 +112,51 @@ public class FightClub {
     }
   }
 
-  public void fight(int a, int b) {
+  public void printStandings() {
 
-    Shooter one = cowboys.get(a);
-    Shooter two = cowboys.get(b);
+    int number_of_cowboys = cowboys.size();
+
+    ArrayList<Shooter> sortedCowboys = new ArrayList<Shooter>();
+    for (int i=0; i<number_of_cowboys; i++) {
+      int index = 0;
+      for (int j=0; j<sortedCowboys.size(); j++) {
+        if (cowboys.get(i).getPoints() < sortedCowboys.get(j).getPoints()) {
+          index = j+1;
+        }
+      }
+      sortedCowboys.add(index, cowboys.get(i));
+    }
+
+    System.out.printf("%15s %15s %15s %15s %15s %n", "Cowboy", "Wins", "Losses", "Ties", "Points");
+    for (int i=0; i<number_of_cowboys; i++) {
+      Shooter s = sortedCowboys.get(i);
+      System.out.printf("%15s %15s %15s %15s %15s %n",
+                        s.toS(),
+                        s.getWins(),
+                        s.getLosses(),
+                        s.getTies(),
+                        s.getPoints());
+    }
+    System.out.println();
+  }
+
+  public void printFighters() {
+
+    int number_of_cowboys = cowboys.size();
+    for (int i=0; i<number_of_cowboys; i++) {
+      System.out.println(cowboys.get(i).toS());
+    }
+
+  }
+
+  public void fight(Shooter one, Shooter two, boolean show_moves, boolean wait) {
+
     Duel d = new Duel(one, two);
 
     String matchup = one.toS() + " vs " + two.toS() + ": ";
     String outcome;
 
-    String result = d.run();
+    String result = d.run(show_moves, wait);
 
     if (result.equals("A")) {
       outcome = one.toS() + " wins!!!";
@@ -95,7 +177,7 @@ public class FightClub {
     one.setPoints(one.getWins()*3 + one.getTies());
     two.setPoints(two.getWins()*3 + two.getTies());
 
-    System.out.printf("%-30.30s  %-30.30s%n", matchup, outcome);
+    System.out.printf("%-30.30s  %-30.30s %-30.30s%n", matchup, outcome, d.rounds);
     System.out.println();
   }
 }

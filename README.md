@@ -57,8 +57,13 @@ CopyCatBitch simply copies his opponent's last move.
 
 You get the idea.
 Email cowboys to me, jreuter@wesleyan.edu, and I'll add them to the tournament, or if you want you could fork the github and submit a pull request with your cowboy file.
+
+Testing your cowboy:
+To run the tournament, first fork the github repo and pull it to your computer.
+Once you have the repo downloaded, add your new cowboy class file to it, comppile everything (javac *.java) and then run the FightClub class (javc FightClub).
 Leaderboard can be updated regularly.
 Looking at/copying the other cowboys in the github is considered cheating.
+
 
 Chump's up, let's do this.
 

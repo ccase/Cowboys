@@ -14,9 +14,9 @@ public class TieGuy extends Shooter {
     int myBullets = myRCount - mySCount;
     int hisBullets = hisRCount - hisSCount;
 
-    if (myBullets > 5 && hisBullets == 0) {return "S";}
+    if (myBullets > 5) {return "S";}
     else if (hisBullets == 0) {return "R";}
-    else if (hisBullets < 6) {return "B";}
+    else if (hisBullets < 5) {return "B";}
     else {return "S";}
   }
 }
