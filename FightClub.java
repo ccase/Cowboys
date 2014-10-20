@@ -17,22 +17,27 @@ public class FightClub {
     System.out.print(AsciiArt.pikachus);
 
     Scanner scanner = new Scanner(System.in);
-    System.out.print("Single duel or full tournament? (s/f/q to quit) ");
+    System.out.print("Duel or tournament? (d/t/q to quit) ");
     
     Boolean done = false;
     while (!done) {
       String answer = scanner.nextLine();
-      if (answer.equals("s")) {
+      if (answer.equals("d")) {
 
         String cowboy1;
         String cowboy2;
         boolean show_moves;
         boolean wait;
+        int number_of_duels;
 
         System.out.print("Cowboy 1? ");
         cowboy1 = scanner.nextLine();
         System.out.print("Cowboy 2? ");
         cowboy2 = scanner.nextLine();
+        
+        System.out.print("How many duels? ");
+
+        number_of_duels = scanner.nextInt();
 
         System.out.print("Show moves? (y/n) ");
         if (scanner.nextLine().equals("y")) {
@@ -42,9 +47,13 @@ public class FightClub {
           show_moves = false;
         }
 
-        FightClub single_duel = new FightClub(cowboy1, cowboy2);
+        FightClub duel = new FightClub(cowboy1, cowboy2);
 
-        single_duel.fight(single_duel.cowboys.get(0), single_duel.cowboys.get(1), show_moves);
+        for (int i=0; i<number_of_duels; i++) {
+          duel.fight(duel.cowboys.get(0), duel.cowboys.get(1), show_moves);
+        }
+        
+        duel.printStandings();
 
         if (show_moves) {
           player = new AePlayWave("./sound_effects/theme_song.wav");
@@ -52,9 +61,9 @@ public class FightClub {
         }
                 
         System.out.println();
-        System.out.print("Single duel or full tournament? (s/f/q to quit) ");
+        System.out.print("Duel or tournament? (d/t/q to quit) ");
         
-      } else if (answer.equals("f")) {
+      } else if (answer.equals("t")) {
 
         boolean should_restart_music = false;
         boolean skip;
@@ -115,7 +124,7 @@ public class FightClub {
     
         fc.printStandings();
         
-        System.out.print("Single duel or full tournament? (s/f/q to quit) ");
+        System.out.print("Duel or tournament? (d/t/q to quit) ");
       } else if (answer.equals("q")) {
         done = true;
         System.out.println();
