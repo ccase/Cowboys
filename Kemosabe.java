@@ -1,13 +1,11 @@
 
-public class Ape extends Shooter {
+public class Kemosabe extends Shooter {
 
 	public String play(String mine, String other){
 		if(mine.equals("")){ return "R"; } //Always reload the first move
-		if(mine.equals("R")){ return "S"; }
-    
-    char othersSecondToLastMove = other.charAt(other.length() - 2);
-    char othersLastMove = other.charAt(other.length() - 1);
-
+		
+    char myLastMove = mine.charAt(mine.length() - 1);
+    char hisLastMove = other.charAt(mine.length() - 1);
 
     int myRCount = mine.length() - mine.replace("R", "").length();
     int hisRCount = other.length() - other.replace("R", "").length();
@@ -19,12 +17,11 @@ public class Ape extends Shooter {
     if (myBullets < 0) {myBullets = 0;}
     if (hisBullets < 0) {hisBullets = 0;}
 
-    if (myBullets > 5) {return "S";}
-    if (othersSecondToLastMove == 'R') {
-      return "R";
-    } else {    
-      return "" + othersLastMove;
+    int rounds = mine.length();
+    if (rounds > 3) {
+      if (mine.substring(mine.length()-3).equals("BBB") && 
+          other.substring(other.length()-3).equals("BBB")) {return "R";}
     }
-	}
+    return "S";
+  }
 }
-

@@ -71,14 +71,13 @@ public class FightClub {
 
         System.out.println();
 
-        FightClub fc = new FightClub("Cowboys.txt");
+        FightClub fc = new FightClub("Tournament_Cowboys.txt");
         int number_of_cowboys = fc.cowboys.size();
 
         for (int i=0; i<number_of_cowboys; i++) {
           for (int j=0; j<number_of_cowboys; j++) {
             if (i != j) {
               if (!skip) {
-
 
                 System.out.println(fc.cowboys.get(i).toS() + " vs " + fc.cowboys.get(j).toS());
                 System.out.println("Type f to fight! (s to skip, a to skip all) ");
