@@ -5,3 +5,8 @@ Tom
 James
 TieGuy
 Elephant
+MadMan
+HappyHobo
+TriggerHappy
+YellowBart
+Ape

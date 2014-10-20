@@ -16,7 +16,7 @@ public class Duel {
 		
 	}
 		
-	public String run(boolean show_moves, boolean wait){
+	public String run(boolean show_moves){
 		int turnCounter = 0;
 
 		while(turnCounter++ < 100){
@@ -25,12 +25,91 @@ public class Duel {
 			String bMove = B.play(hisB, hisA);
 			hisA = hisA + aMove;
 			hisB = hisB + bMove;
-      
-      if (show_moves) {
-        System.out.println(aMove + " " + bMove);
-      }
 
-      if (wait) {
+      int printBulletsA = bulletsA + ((aMove.equals("R"))?1:0) - ((aMove.equals("S"))?1:0);
+      int printBulletsB = bulletsB + ((bMove.equals("R"))?1:0) - ((bMove.equals("S"))?1:0);
+      if (printBulletsA < 0) {printBulletsA = 0;}
+      if (printBulletsB < 0) {printBulletsB = 0;}
+
+      if (show_moves) {
+
+        System.out.print("\u001b[2J");
+        System.out.flush();
+        System.out.println("Round " + rounds + "\n");
+        System.out.println("      " + A.toS() + "                     ------versus------                    " + B.toS() + "\n");
+        System.out.println("Ammo  " + printBulletsA + "                                                           " + printBulletsB);
+        
+        AePlayWave aw;
+
+        if (aMove.equals("S") && bMove.equals("S")) {
+          System.out.print(AsciiArt.ss);
+          if (bulletsA > 5 && bulletsB > 5) {
+            aw = new AePlayWave("./sound_effects/richochet.wav" );
+          } else if (bulletsA > 5 || bulletsB > 5) {
+            aw = new AePlayWave("./sound_effects/shot.wav" );
+          } else if (bulletsA > 0 && bulletsB > 0) {
+            aw = new AePlayWave("./sound_effects/richochet.wav" );
+          } else if (bulletsA > 0 || bulletsB > 0) {
+            aw = new AePlayWave("./sound_effects/pain.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("S") && bMove.equals("R")) {
+          System.out.print(AsciiArt.sr);
+          if (bulletsA > 0) {
+            aw = new AePlayWave("./sound_effects/pain.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("S") && bMove.equals("B")) {
+          System.out.print(AsciiArt.sb);
+          if (bulletsA > 5) {
+            aw = new AePlayWave("./sound_effects/shot.wav" );
+          } else if (bulletsA > 0) {
+            aw = new AePlayWave("./sound_effects/richochet.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("R") && bMove.equals("S")) {
+          System.out.print(AsciiArt.rs);
+          if (bulletsB > 0) {
+            aw = new AePlayWave("./sound_effects/pain.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("R") && bMove.equals("R")) {
+          System.out.print(AsciiArt.rr);
+          aw = new AePlayWave("./sound_effects/reload.wav" );
+        }
+        else if (aMove.equals("R") && bMove.equals("B")) {
+          System.out.print(AsciiArt.rb);
+          aw = new AePlayWave("./sound_effects/reload.wav" );
+        }
+        else if (aMove.equals("B") && bMove.equals("S")) {
+          System.out.print(AsciiArt.bs);
+          if (bulletsB > 5) {
+            aw = new AePlayWave("./sound_effects/shot.wav" );
+          } else if (bulletsB > 0) {
+            aw = new AePlayWave("./sound_effects/richochet.wav" );
+          } else {
+            aw = new AePlayWave("./sound_effects/blank.wav" );
+          }
+        }
+        else if (aMove.equals("B") && bMove.equals("R")) {
+          System.out.print(AsciiArt.br);
+          aw = new AePlayWave("./sound_effects/reload.wav" );
+        }
+        else {
+          System.out.print(AsciiArt.bb);
+          aw = new AePlayWave("./sound_effects/block.wav" );
+        }
+
+        aw.start();
+      
         Scanner s = new Scanner(System.in);
         s.nextLine();
 
@@ -105,4 +184,5 @@ public class Duel {
     }
     return "T";
   }
+  
 }

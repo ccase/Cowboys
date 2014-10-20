@@ -12,7 +12,9 @@ class Elephant extends Shooter
 	  }
 
 	    public String play(String me, String him){
-
+        for (Choice c:analysis) {
+          c.probability = 0;
+        }
 	    int hisAmmo = findAmmo(him);
 		int meAmmo = findAmmo(me);	
 	    	

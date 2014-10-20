@@ -7,7 +7,15 @@ public class FightClub {
   ArrayList<Shooter> cowboys = new ArrayList<Shooter>();
 
 	public static void main(String[] args){
-    
+
+    AePlayWave player = new AePlayWave("./sound_effects/theme_song.wav");
+    player.start();
+
+    System.out.println();
+    System.out.println();
+  
+    System.out.print(AsciiArt.pikachus);
+
     Scanner scanner = new Scanner(System.in);
     System.out.print("Single duel or full tournament? (s/f/q to quit) ");
     
@@ -29,25 +37,39 @@ public class FightClub {
         System.out.print("Show moves? (y/n) ");
         if (scanner.nextLine().equals("y")) {
           show_moves = true;
+          player.suspend();
         } else {
           show_moves = false;
         }
 
-        System.out.print("Wait between turns? (y/n) ");
-        if (scanner.nextLine().equals("y")) {
-          wait = true;
-        } else {
-          wait = false;
-        }
-
         FightClub single_duel = new FightClub(cowboy1, cowboy2);
-        single_duel.fight(single_duel.cowboys.get(0), 
-                          single_duel.cowboys.get(1), show_moves, wait);
+
+        single_duel.fight(single_duel.cowboys.get(0), single_duel.cowboys.get(1), show_moves);
+
+        if (show_moves) {
+          player = new AePlayWave("./sound_effects/theme_song.wav");
+          player.start();
+        }
                 
         System.out.println();
         System.out.print("Single duel or full tournament? (s/f/q to quit) ");
         
       } else if (answer.equals("f")) {
+
+        boolean should_restart_music = false;
+        boolean skip;
+        boolean show_moves;
+
+        System.out.print("Want to see the action? (y/n) ");
+        if (scanner.nextLine().equals("y")) {
+          skip = false;
+          show_moves = true;
+        } else {
+          skip = true;
+          show_moves = false;
+        }
+
+        System.out.println();
 
         FightClub fc = new FightClub("Cowboys.txt");
         int number_of_cowboys = fc.cowboys.size();
@@ -55,11 +77,41 @@ public class FightClub {
         for (int i=0; i<number_of_cowboys; i++) {
           for (int j=0; j<number_of_cowboys; j++) {
             if (i != j) {
-              System.out.println(fc.cowboys.get(i).toS() + " vs " + 
-                                 fc.cowboys.get(j).toS());
-              fc.fight(fc.cowboys.get(i),fc.cowboys.get(j),true,true);
+              if (!skip) {
+
+
+                System.out.println(fc.cowboys.get(i).toS() + " vs " + fc.cowboys.get(j).toS());
+                System.out.println("Type f to fight! (s to skip, a to skip all) ");
+
+                boolean isDone = false;
+                while (!isDone) {
+                  String fight_or_skip = scanner.nextLine();
+                  if (fight_or_skip.equals("f")) {
+                    player.suspend();
+                    should_restart_music = true;
+                    show_moves = true;
+                    isDone = true;
+                  } else if (fight_or_skip.equals("s")) {
+                    show_moves = false;
+                    isDone = true;
+                  } else if (fight_or_skip.equals("a")) {
+                    show_moves = false;
+                    skip = true;
+                    isDone = true;
+                  }
+                }
+                isDone = false;
+              } else {
+                show_moves = false;
+              }
+              fc.fight(fc.cowboys.get(i),fc.cowboys.get(j),show_moves);
             }
           }
+        }
+
+        if (should_restart_music) {
+          player = new AePlayWave("./sound_effects/theme_song.wav");
+          player.start();
         }
     
         fc.printStandings();
@@ -67,6 +119,10 @@ public class FightClub {
         System.out.print("Single duel or full tournament? (s/f/q to quit) ");
       } else if (answer.equals("q")) {
         done = true;
+        System.out.println();
+        System.out.println();
+        System.out.println(AsciiArt.owls);
+        player.stop();
       } else {
         System.out.print("? ");
       }
@@ -149,14 +205,14 @@ public class FightClub {
 
   }
 
-  public void fight(Shooter one, Shooter two, boolean show_moves, boolean wait) {
+  public void fight(Shooter one, Shooter two, boolean show_moves) {
 
     Duel d = new Duel(one, two);
 
     String matchup = one.toS() + " vs " + two.toS() + ": ";
     String outcome;
 
-    String result = d.run(show_moves, wait);
+    String result = d.run(show_moves);
 
     if (result.equals("A")) {
       outcome = one.toS() + " wins!!!";
@@ -177,7 +233,7 @@ public class FightClub {
     one.setPoints(one.getWins()*3 + one.getTies());
     two.setPoints(two.getWins()*3 + two.getTies());
 
-    System.out.printf("%-30.30s  %-30.30s %-30.30s%n", matchup, outcome, d.rounds);
+    System.out.printf("%-30.30s  %-30.30s %-30.30s%n", matchup, outcome, "in " + d.rounds + " rounds");
     System.out.println();
   }
 }
