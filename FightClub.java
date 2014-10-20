@@ -34,10 +34,10 @@ public class FightClub {
         cowboy1 = scanner.nextLine();
         System.out.print("Cowboy 2? ");
         cowboy2 = scanner.nextLine();
-        
-        System.out.print("How many duels? ");
 
+        System.out.print("How many duels? ");
         number_of_duels = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.print("Show moves? (y/n) ");
         if (scanner.nextLine().equals("y")) {
