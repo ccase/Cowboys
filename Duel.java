@@ -33,8 +33,8 @@ public class Duel {
 
       if (show_moves) {
 
-        // System.out.print("\u001b[2J");
-        // System.out.flush();
+        System.out.print("\u001b[2J");
+        System.out.flush();
         System.out.println("Round " + rounds + "\n");
         System.out.println("      " + A.toS() + "                     ------versus------                    " + B.toS() + "\n");
         System.out.println("Ammo  " + printBulletsA + "                                                           " + printBulletsB);
