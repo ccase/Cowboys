@@ -37,54 +37,43 @@ public class Jamesy extends Shooter{
 			}
 		}
 		if(other.length() > 10) {
-		if(otherAmmo >= 5 && other.substring(other.length() - 10).equals("BBBBBBBBBB")) {
-			if(mine.charAt(mine.length() -1) == 'B'){
-			return "R";}
-			if(mine.charAt(mine.length() -1) == 'R') {
-				return "B";
+			if(otherAmmo >= 5 && other.substring(other.length() - 10).equals("BBBBBBBBBB")) {
+				if(mine.charAt(mine.length() -1) == 'B'){
+					return "R";
+				}
+				if(mine.charAt(mine.length() -1) == 'R') {
+					return "B";
+				}
 			}
 		}
-	}
-		if(other.length() > 3) 
-		{
+		if(other.length() > 3) {
 			if (other.substring(other.length() - 3).equals("BBB") && mine.substring(mine.length() - 3).equals("BBB")) {
-				if(myAmmo > 5)
-					{
-						return "S";
-					}
+				if(myAmmo > 5) {
+					return "S";
+				}
 				else {
 					return "R";
 				}
-		}
+			}
 		
-			
 		}
 		if(otherAmmo >0 && otherAmmo < 5) {
 			return "B";
 		}
 		if(otherAmmo >= 5 && myAmmo > 1) {
-			
 			return "S";
-		 
-		}
+		 }
 		if(otherAmmo >= 5 && mine.charAt(mine.length() - 1) == 'S') {
 				return "B";
 		}
-
-		if(otherAmmo < 1) 
-		{
-			if(myAmmo > 0){
+		if(otherAmmo < 1) {
+			if(myAmmo > 0) {
 				return "S";
 			} else {
 				return "R";
 			}
 		}
-		
-	
 	return "R";
-
 	}
-
-	
 }
 
