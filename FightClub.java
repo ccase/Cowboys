@@ -34,10 +34,10 @@ public class FightClub {
         cowboy1 = scanner.nextLine();
         System.out.print("Cowboy 2? ");
         cowboy2 = scanner.nextLine();
-        
-        System.out.print("How many duels? ");
 
+        System.out.print("How many duels? ");
         number_of_duels = scanner.nextInt();
+        scanner.nextLine();
 
         System.out.print("Show moves? (y/n) ");
         if (scanner.nextLine().equals("y")) {
@@ -64,11 +64,15 @@ public class FightClub {
         System.out.print("Duel or tournament? (d/t/q to quit) ");
         
       } else if (answer.equals("t")) {
-
         boolean should_restart_music = false;
         boolean skip;
         boolean show_moves;
+        int number_of_iterations = 1;
 
+        System.out.print("How many iterations? ");
+        number_of_iterations = scanner.nextInt();
+
+        scanner.nextLine();
         System.out.print("Want to see the action? (y/n) ");
         if (scanner.nextLine().equals("y")) {
           skip = false;
@@ -78,41 +82,41 @@ public class FightClub {
           show_moves = false;
         }
 
-        System.out.println();
-
         FightClub fc = new FightClub("Tournament_Cowboys.txt");
         int number_of_cowboys = fc.cowboys.size();
 
-        for (int i=0; i<number_of_cowboys; i++) {
-          for (int j=0; j<number_of_cowboys; j++) {
-            if (i != j) {
-              if (!skip) {
+        for (int n=0; n<number_of_iterations; n++) {
+          for (int i=0; i<number_of_cowboys; i++) {
+            for (int j=0; j<number_of_cowboys; j++) {
+              if (i != j) {
+                if (!skip) {
 
-                System.out.println(fc.cowboys.get(i).toS() + " vs " + fc.cowboys.get(j).toS());
-                System.out.println("Type f to fight! (s to skip, a to skip all) ");
+                  System.out.println(fc.cowboys.get(i).toS() + " vs " + fc.cowboys.get(j).toS());
+                  System.out.println("Type f to fight! (s to skip, a to skip all) ");
 
-                boolean isDone = false;
-                while (!isDone) {
-                  String fight_or_skip = scanner.nextLine();
-                  if (fight_or_skip.equals("f")) {
-                    player.suspend();
-                    should_restart_music = true;
-                    show_moves = true;
-                    isDone = true;
-                  } else if (fight_or_skip.equals("s")) {
-                    show_moves = false;
-                    isDone = true;
-                  } else if (fight_or_skip.equals("a")) {
-                    show_moves = false;
-                    skip = true;
-                    isDone = true;
+                  boolean isDone = false;
+                  while (!isDone) {
+                    String fight_or_skip = scanner.nextLine();
+                    if (fight_or_skip.equals("f")) {
+                      player.suspend();
+                      should_restart_music = true;
+                      show_moves = true;
+                      isDone = true;
+                    } else if (fight_or_skip.equals("s")) {
+                      show_moves = false;
+                      isDone = true;
+                    } else if (fight_or_skip.equals("a")) {
+                      show_moves = false;
+                      skip = true;
+                      isDone = true;
+                    }
                   }
+                  isDone = false;
+                } else {
+                  show_moves = false;
                 }
-                isDone = false;
-              } else {
-                show_moves = false;
+                fc.fight(fc.cowboys.get(i),fc.cowboys.get(j),show_moves);
               }
-              fc.fight(fc.cowboys.get(i),fc.cowboys.get(j),show_moves);
             }
           }
         }
