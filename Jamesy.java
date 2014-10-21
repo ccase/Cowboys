@@ -1,5 +1,5 @@
 
-public class James extends Shooter{
+public class Jamesy extends Shooter{
 	
 	public String play(String mine, String other) {
 		if(mine.equals("")) {return "R";}
