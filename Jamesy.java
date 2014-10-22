@@ -1,4 +1,3 @@
-
 public class Jamesy extends Shooter{
 	
 	public String play(String mine, String other) {
@@ -55,7 +54,7 @@ public class Jamesy extends Shooter{
 			}	
 		}
 		if(other.length() > 3) {
-			if (other.substring(other.length() - 3).equals("BBB") && mine.substring(mine.length() - 3).equals("BBB")) {
+			if (getBlocks(3, other) && getBlocks(3, mine)) {
 				if(myAmmo > 5) {
 					return "S";
 				}
@@ -82,6 +81,15 @@ public class Jamesy extends Shooter{
 			}
 		}
 	return "R";
+	}
+
+	public boolean getBlocks(int thresh, String hist) {
+		for(int i = hist.length() - thresh; i < hist.length(); i++) {
+			if(hist.charAt(i) != 'B') {
+				return false;	
+			}
+		}
+		return true; 
 	}
 }
 

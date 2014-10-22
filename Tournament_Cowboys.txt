@@ -12,3 +12,5 @@ YellowBart
 Ape
 Kemosabe
 CamelCase
+Bojango
+Sprinter
