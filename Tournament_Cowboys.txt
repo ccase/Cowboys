@@ -11,3 +11,4 @@ TriggerHappy
 YellowBart
 Ape
 Kemosabe
+CamelCase
