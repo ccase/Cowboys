@@ -31,7 +31,7 @@ public class QuickDuel {
         FightClub duel = new FightClub(cowboy1, cowboy2);
 
         for (int i=0; i<number_of_duels; i++) {
-          duel.fight(duel.cowboys.get(0), duel.cowboys.get(1), false);
+          duel.fight(duel.cowboys.get(0), duel.cowboys.get(1), true);
         }
         
         duel.printStandings();

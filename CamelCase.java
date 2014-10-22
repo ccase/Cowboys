@@ -2,6 +2,24 @@ import java.util.Random;
 
 // Caleb's brother
 
+/*
+         Cowboy            Wins          Losses            Ties          Points
+      CamelCase            2250             350               0            6750
+      HappyHobo            2183             417               0            6549
+         Jamesy            2066             334             200            6398
+       Kemosabe            2081             401             118            6361
+         TieGuy            1587            1013               0            4761
+            Tom            1361            1239               0            4083
+            Ape             930            1470             200            2990
+      SimpleJoe             967            1633               0            2901
+         MadMan             925            1640              35            2810
+       Elephant             719            1403             478            2635
+    AveragePete             770            1630             200            2510
+   CopyCatBitch             453            1747             400            1759
+     YellowBart             107            1418            1075            1396
+   TriggerHappy             248            1952             400            1144
+*/
+
 public class CamelCase extends Shooter {
     
     String[] possiblePlays = {"S","R","B"};
@@ -51,30 +69,22 @@ public class CamelCase extends Shooter {
 
         if (myAmmo > otherAmmo) {
             // if i can pierce
-            if (myAmmo >= 6) {
+            if (myAmmo >= 5) {
                 return shoot();
             }
+            if (plays > 3 && lastPlays(other, 3).equals("BBB")) { return random(); }
             return reload();
         } else if (otherAmmo > myAmmo) {
             // if he can pierce
             if (otherAmmo >= 6) {
                 // hope he fucks up
-                return reload();
-            }
-            return shoot();
-        }
-
-        if (plays > 3) {
-            if (lastPlays(mine, 3).equals(lastPlays(other, 3))) {
-                if (myAmmo < 6) { return random(); }
                 return shoot();
             }
+            return reload();
         }
-
-
-        if (otherLastPlay == 'S') {
-            if (myAmmo > 0) { return shoot(); }
-            return block();
+         
+        if (plays > 5) {
+            return random();
         }
 
         return block();
