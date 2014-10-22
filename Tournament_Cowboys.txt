@@ -12,3 +12,4 @@ YellowBart
 Ape
 Kemosabe
 Bojango
+Sprinter
