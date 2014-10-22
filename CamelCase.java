@@ -11,21 +11,50 @@ public class CamelCase extends Shooter {
     }
 
     public String play(String mine, String other){
-        if (mine.equals("")) {
-            return "R";
-        }
-
         int myAmmo = countMatches(mine, 'R') - countMatches(mine, 'S');
         int otherAmmo = countMatches(other, 'R') - countMatches(other, 'S');
 
-        if ((myAmmo == otherAmmo) && myAmmo == 0) {
-            return "R";
+        if (otherAmmo == 0) {
+            if (myAmmo == 0) {
+                return "R";
+            } else {
+                return "S";
+            }
+        }
+
+        // exec only gets here if >0 rounds played
+        char myLastPlay = mine.charAt(mine.length() - 1);
+        char otherLastPlay = other.charAt(other.length() - 1);
+
+        if (otherLastPlay == 'B') {
+            if (myAmmo < 6 && myLastPlay != 'R') {
+                return "R";
+            } else {
+                return "B";
+            }
+        }
+
+        if (otherLastPlay == 'S') {
+            if (myAmmo > 0) {
+                return "S";
+            } else {
+                return "B";
+            }
         }
 
         if (myAmmo > otherAmmo) {
-            return "S";
+            // if i can pierce
+            if (myAmmo >= 6) {
+                return "S";
+            }
+            return "R";
         } else if (otherAmmo > myAmmo) {
-            return "B";
+            // if he can pierce
+            if (otherAmmo >= 6) {
+                // hope he fucks up
+                return "R";
+            }
+            return "S";
         }
 
         return "B";
