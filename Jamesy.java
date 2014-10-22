@@ -37,7 +37,8 @@ public class Jamesy extends Shooter{
 			}
 		}
 		if(other.length() > 10) {
-			if(otherAmmo >= 5 && other.substring(other.length() - 10).equals("BBBBBBBBBB")) {
+			if(//otherAmmo >= 5 &&
+			 other.substring(other.length() - 10).equals("BBBBBBBBBB")) {
 				if(mine.charAt(mine.length() -1) == 'B'){
 					return "R";
 				}
@@ -45,6 +46,13 @@ public class Jamesy extends Shooter{
 					return "B";
 				}
 			}
+			
+			if(mine.substring(mine.length() - 9).equals("BBBBBBBBB")
+				&& other.substring(other.length() -2).equals("RS")) {
+				if(myAmmo > 1) {
+					return "S";
+				}
+			}	
 		}
 		if(other.length() > 3) {
 			if (other.substring(other.length() - 3).equals("BBB") && mine.substring(mine.length() - 3).equals("BBB")) {
