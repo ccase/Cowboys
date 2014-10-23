@@ -43,6 +43,11 @@ public class Kemosabe extends Shooter {
           if (myLastMove == 'R' && myBullets > 0) {return "S";}
           else {return "R";}
         }
+        
+        if (hisLastFive.equals("RRRRR") && myBullets > 0) {
+          return "S";
+        }
+
       
         if (rounds > 5) {
       
@@ -83,6 +88,7 @@ public class Kemosabe extends Shooter {
           }
         }
       } 
+      
       if (myLastThree.equals(hisLastThree) || (hisLastThree == "BBB")) {
         int r = randInt(0,5);
         if ((r == 0 || r == 1) && myBullets > 0) {return "S";}
