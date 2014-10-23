@@ -57,7 +57,10 @@ public class Duel {
         }
         else if (aMove.equals("S") && bMove.equals("R")) {
           System.out.print(AsciiArt.sr);
-          if (bulletsA > 0) {
+          if (bulletsA > 5) {
+            aw = new AePlayWave("./sound_effects/shot.wav" );
+          }
+          else if (bulletsA > 0) {
             aw = new AePlayWave("./sound_effects/pain.wav" );
           } else {
             aw = new AePlayWave("./sound_effects/blank.wav" );
@@ -75,7 +78,9 @@ public class Duel {
         }
         else if (aMove.equals("R") && bMove.equals("S")) {
           System.out.print(AsciiArt.rs);
-          if (bulletsB > 0) {
+          if (bulletsB > 5) {
+            aw = new AePlayWave("./sound_effects/shot.wav" );
+          } else if (bulletsB > 0){
             aw = new AePlayWave("./sound_effects/pain.wav" );
           } else {
             aw = new AePlayWave("./sound_effects/blank.wav" );

@@ -21,12 +21,6 @@ public class Kemosabe extends Shooter {
 
     if (myBullets > 5) {return "S";}
 
-    // if (myLastMove == 'R') {
-    //   int r = randInt(0,3);
-    //   if (r == 0 && myBullets > 0) {return "S";}
-    //   else {return "B";}
-    // }
-
     if (hisBullets == 0) {return "R";}
 
     if (rounds > 3) {
@@ -47,7 +41,6 @@ public class Kemosabe extends Shooter {
         if (hisLastFive.equals("RRRRR") && myBullets > 0) {
           return "S";
         }
-
       
         if (rounds > 5) {
       
@@ -58,33 +51,6 @@ public class Kemosabe extends Shooter {
             if (hisLastThree.substring(0,1).equals("R")) {
               if (myBullets > 0) {return "S";}
             }
-            //if (hisLastThree.equals("SSS")) {return "B";}
-            // else if (hisLastThree.equals("SSR")) {return "B";}
-            // else if (hisLastThree.equals("SSB")) {return "B";}
-            // else if (hisLastThree.equals("SRS")) {return "B";}
-            // else if (hisLastThree.equals("SRR")) {return "B";}
-            // else if (hisLastThree.equals("SRB")) {return "B";}
-            // else if (hisLastThree.equals("SBS")) {return "B";}
-            // else if (hisLastThree.equals("SBR")) {return "B";}
-            // else if (hisLastThree.equals("SBB")) {return "B";}
-            // if (hisLastThree.equals("RSS")) {if (myBullets>0){return "S";}else{return "R";}}
-            // else if (hisLastThree.equals("RSR")) {if (myBullets>0){return "S";}else{return "R";}}
-            // else if (hisLastThree.equals("RSB")) {if (myBullets>0){return "S";}else{return "R";}}
-            // else if (hisLastThree.equals("RRS")) {if (myBullets>0){return "S";}else{return "R";}}
-            // else if (hisLastThree.equals("RRR")) {if (myBullets>0){return "S";}else{return "R";}}
-            // else if (hisLastThree.equals("RRB")) {if (myBullets>0){return "S";}else{return "R";}}
-            // else if (hisLastThree.equals("RBS")) {if (myBullets>0){return "S";}else{return "R";}}
-            // else if (hisLastThree.equals("RBR")) {if (myBullets>0){return "S";}else{return "R";}}
-            // else if (hisLastThree.equals("RBB")) {if (myBullets>0){return "S";}else{return "R";}}
-            // else if (hisLastThree.equals("BSS")) {return "B";}
-            // else if (hisLastThree.equals("BSR")) {return "B";}
-            // else if (hisLastThree.equals("BSB")) {return "B";}
-            // else if (hisLastThree.equals("BRS")) {return "B";}
-            // else if (hisLastThree.equals("BRR")) {return "B";}
-            // else if (hisLastThree.equals("BRB")) {return "B";}
-            // else if (hisLastThree.equals("BBS")) {return "B";}
-            // else if (hisLastThree.equals("BBR")) {return "B";}
-            // else {return "B";}
           }
         }
       } 
