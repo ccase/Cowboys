@@ -1,9 +1,12 @@
+import java.util.LinkedList;
+
 //Elephants never forget
 class Elephant extends Shooter
 {
 	
 
   static Choice[] analysis = new Choice[9];
+  static LinkedList<Choice> ammoAnalysis = new LinkedList<Choice>();
   public Elephant(){ analysis[0] = new Choice("RR", 0); analysis[1] = new Choice("RB", 0); analysis[2] = new Choice("RS", 0); analysis[3] = new Choice("SR", 0); analysis[4] = new Choice("SB", 0); analysis[5] = new Choice("SS", 0); analysis[6] = new Choice("BR", 0); analysis[7] = new Choice("BB", 0); analysis[8] = new Choice("BS", 0); }
   
   static void main(String[] args){
@@ -15,6 +18,9 @@ class Elephant extends Shooter
         for (Choice c:analysis) {
           c.probability = 0;
         }
+        for (Choice c:ammoAnalysis) {
+            c.probability = 0;
+          }
 	    int hisAmmo = findAmmo(him);
 		int meAmmo = findAmmo(me);	
 	    	
@@ -27,20 +33,40 @@ class Elephant extends Shooter
 	    	return block();
 	    }
 	    //Special cases
-	    //If almost at shotgun, wait for them to spend ammo
-	    else if(meAmmo == 5 && hisAmmo > 0){
+	    //If almost at shotgun, and they aren't goign for shotgun, wait for them to spend ammo
+	    else if(meAmmo == 5 && hisAmmo > 0 && hisAmmo < 4){
 	    	return block();
 	    	
 	    }
+	    
 	    //If they are almost at shotgun, save a bullet but try to stop them
 	    else if(hisAmmo == 5 && meAmmo > 1){
 	    	return shoot();
 	    }
 	    else{
-	      analyze(him);
+	      analyze(him, me);
 	      
 
 	      //What will he do next?
+	      char hisNext = 'B';
+	      
+	      int mostLikely = 0;
+	      for(Choice c : ammoAnalysis){
+	          if(c != null && c.probability > mostLikely){
+	        	  //System.out.println("Option = " + c.pattern);
+	        	  //System.out.println("Prob = " + c.probability);
+	        	  mostLikely = c.probability;
+	        	  hisNext = c.pattern.charAt(0); }
+	      }
+	      
+	      if(mostLikely > 0){
+	    	  //System.out.println("Using Ammo Guess");
+	      }
+	      else{
+	    	  //System.out.println("Using normal guess");
+	      
+	      
+	      
 	      char hisLast = him.toCharArray()[him.toCharArray().length - 1];
 	      Choice[] hisOptions = new Choice[3];
 	      int k = 0;
@@ -51,8 +77,8 @@ class Elephant extends Shooter
 	      }
 
 
-	      char hisNext = 'S';
-	      int mostLikely = 0;
+	       hisNext = 'S';
+	       mostLikely = 0;
 	      for(Choice c : hisOptions){
 	          if(c != null && c.probability > mostLikely){
 	        	  //System.out.println("Option = " + c.pattern);
@@ -60,8 +86,8 @@ class Elephant extends Shooter
 	        	  mostLikely = c.probability;
 	        	  hisNext = c.pattern.toCharArray()[1]; }
 	      }
-
-
+			
+	      }
 
 
 	      //Now go through potential cases
@@ -71,15 +97,23 @@ class Elephant extends Shooter
 	      if(meAmmo > 5){ return shoot(); }
 	      else if(meAmmo > 0){
 	        switch(hisNext){
-	          case 'S': return block();
+	          case 'S':
+	        	  if(hisAmmo > 0){
+	        		  return block();
+	        	  }
+	        	  else{
+	        		  return reload();
+	        	  }
 	          case 'B': return reload();
-	          case 'R': return shoot();
+	          case 'R':
+	        	  if(meAmmo == 5){return reload();}
+	        	  return shoot();
 	        }
 	      }
 	      else{
 	        switch(hisNext){
 	          case 'S': return block();
-	          case 'B': return block();
+	          case 'B': return reload();
 	          case 'R': return reload();
 	        }
 	      }
@@ -98,11 +132,31 @@ class Elephant extends Shooter
 		  return "S"; }
 
 
-	  void analyze(String his){
+	  void analyze(String his, String myHis){
+		//ammo analysis first
+		for(int i = 0; i < his.length(); i++){
+		  int hisAmmo = findAmmo(his.substring(0, i));
+		  int myAmmo = findAmmo(myHis.substring(0, i));
+		  boolean match = false;
+		  for(Choice c : ammoAnalysis){
+			  if(c.hisAmmo == hisAmmo && c.myAmmo == myAmmo && c.pattern.equals(his.charAt(i))){
+				  match = true;
+				  c.probability++;
+			  }
+		  }
+		  if(!match){
+			  Choice c = new Choice("Ammo", 0);
+			  c.myAmmo = myAmmo;
+			  c.hisAmmo = hisAmmo;
+			  c.pattern = "" + his.charAt(i);
+		  }
+		} 
+		
+		
 		//System.out.println("Analyzing");
 	    char[] shortString = his.substring(1,his.length() - 1).toCharArray();
 	    char[] longString = his.toCharArray();
-	    for(int i = 0; i < shortString.length; i++) {
+	    for( int i = 0; i < shortString.length; i++) {
 	      String pattern = "" + longString[i] + shortString[i];
 	      for(Choice c : analysis){
 	    	  if(c.pattern.equals(pattern)){
@@ -127,6 +181,8 @@ class Elephant extends Shooter
 	}
 
 	class Choice{
+		int myAmmo;
+		int hisAmmo;
 	    String pattern;
 	    int probability;
 
