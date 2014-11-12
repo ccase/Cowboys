@@ -3,6 +3,7 @@ import java.util.Random;
 public class Kemosabe extends Shooter {
 
 	public String play(String mine, String other){
+
 		if(mine.equals("")){ return "R"; } //Always reload the first move
 
     int rounds = mine.length();
@@ -56,9 +57,9 @@ public class Kemosabe extends Shooter {
       } 
       
       if (myLastThree.equals(hisLastThree) || (hisLastThree == "BBB")) {
-        int r = randInt(0,3);
+        int r = randInt(0,5);
         if ((r == 0 || r == 1) && myBullets > 0) {return "S";}
-        //else if (r == 2) {return "B";}
+        else if (r == 2) {return "B";}
         else {return "R";}
       } 
     }
