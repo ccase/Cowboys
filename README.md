@@ -62,7 +62,7 @@ Testing your cowboy:
 To run the tournament, first fork the github repo and pull it to your computer.
 Once you have the repo downloaded, add your new cowboy class file to it, compile everything (javac *.java) and then run the FightClub class (java FightClub).
 Leaderboard will be updated regularly.
-Feel free to look at other submissions, but it is considered bad sportsmanship to copy ideas or specifically target another code with your own.
+Feel free to look at other submissions, but it is considered bad sportsmanship to copy ideas or specifically target another code with your own. Remember, "A decent cowboy does not take what belongs to someone else and if he does he deserves to be strung up and left for the flies and coyotes" ~ Judge Roy Bean
 
 Pony up, let's do this.
 
