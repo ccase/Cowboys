@@ -82,7 +82,7 @@ public class FightClub {
           show_moves = false;
         }
 
-        FightClub fc = new FightClub("Tournament_Cowboys.txt");
+        FightClub fc = new FightClub("all_cowboys.txt");
         int number_of_cowboys = fc.cowboys.size();
 
         for (int n=0; n<number_of_iterations; n++) {

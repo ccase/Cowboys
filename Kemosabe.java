@@ -2,8 +2,12 @@ import java.util.Random;
 
 public class Kemosabe extends Shooter {
 
+  private Boolean shoot = false;
+
 	public String play(String mine, String other){
-		if(mine.equals("")){ return "R"; } //Always reload the first move
+		if(mine.equals("")){shoot = false;return "R";} //Always reload the first move
+
+    if(shoot) {shoot = false;return "S";}
 
     int rounds = mine.length();
     char myLastMove = mine.charAt(mine.length() - 1);
@@ -17,6 +21,7 @@ public class Kemosabe extends Shooter {
     int hisBullets = hisRCount - hisSCount;
 
     if (myBullets < 0) {myBullets = 0;}
+
     if (hisBullets < 0) {hisBullets = 0;}
 
     if (myBullets > 5) {return "S";}
@@ -41,6 +46,12 @@ public class Kemosabe extends Shooter {
         if (hisLastFive.equals("RRRRR") && myBullets > 0) {
           return "S";
         }
+        
+        if (hisLastFive.equals("BBBBB")) {
+          if (myBullets < 4) {return "R";}
+          else if (hisBullets < 1) {return "R";}
+          else {return "B";}
+        }
       
         if (rounds > 5) {
       
@@ -56,10 +67,10 @@ public class Kemosabe extends Shooter {
       } 
       
       if (myLastThree.equals(hisLastThree) || (hisLastThree == "BBB")) {
-        int r = randInt(0,3);
+        int r = randInt(0,4);
         if ((r == 0 || r == 1) && myBullets > 0) {return "S";}
-        //else if (r == 2) {return "B";}
-        else {return "R";}
+        else if (r == 2) {return "B";}
+        else {shoot = true;return "R";}
       } 
     }
 
