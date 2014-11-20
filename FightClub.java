@@ -3,7 +3,6 @@ import java.util.Scanner;
 import java.io.*;
 
 public class FightClub {
-
   ArrayList<Shooter> cowboys = new ArrayList<Shooter>();
 
 	public static void main(String[] args){
